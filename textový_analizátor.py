@@ -3,8 +3,6 @@
     autor: Markéta Fejtek
     email: demura.m@seznam.cz
 """
-from pydoc import text
-import re
 registrovane_uzivatele = {
     "bob": "123", 
     "ann": "pass123", 
