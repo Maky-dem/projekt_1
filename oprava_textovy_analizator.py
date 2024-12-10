@@ -1,4 +1,5 @@
 """
+
     projekt_1.py: první projekt do Engento Online Python Akademie
     autor: Markéta Fejtek
     email: demura.m@seznam.cz
@@ -7,6 +8,7 @@
 import collections
 
 import re
+
 
 registrovane_uzivatele = {
     "bob": "123", 
@@ -58,20 +60,23 @@ else:
 print("We have", len(TEXTS), "texts to be analyzed.")
 print(odelovac)
 
-text_k_analyza = input("Enter a number btw. 1 and "+\
-         str(len(TEXTS)) + "to select :")
-if text_k_analyza:
-    text_k_analyza.isdigit() and int(text_k_analyza)\
-     in range(1, len(TEXTS) + 1)
-    
-else:
-    print("You have entered a number that we do not have in our offer,\
-         terminating the programm")
+text_k_analyza = input(f"Enter a number btw. 1 and {len(TEXTS)} to select :")
+
+if not text_k_analyza.isdigit():
+    print("You have entered a wrong sign!, terminating the programm !")
     quit()
 
-text_analizuji = TEXTS[int(text_k_analyza)-1]
+cislo_textu = int(text_k_analyza)
+
+if cislo_textu not in range(1, len(TEXTS) + 1):
+    print("You have entered a number that we do not have in our offer,"
+          " terminating the programm !")
+    quit()   
+
+text_analizuji = TEXTS[cislo_textu - 1]
 cleand_text = re.sub(r"[^a-zA-z0-9\s]", " ", text_analizuji)
 slova_textu = cleand_text.split()# rozdeleni textu na slova
+
 print(odelovac) 
 print("There are", len(slova_textu), "words in the selected text.")
 
@@ -102,12 +107,13 @@ def analizuj_delky_slov(text):
     delky_slov = []
     for slovo in slova_textu:
         delky_slov.append(len(slovo))
-    pocet_slov_dle_delky = collections.Counter(delky_slov)
+        pocet_slov_dle_delky = collections.Counter(delky_slov)
     return delky_slov, pocet_slov_dle_delky
     
 delky_slov, pocet_slov_dle_delky = analizuj_delky_slov(slova_textu) 
 
 odstup_tabulka = int(max(pocet_slov_dle_delky.values())) + 1  
+
 print(odelovac) 
 print("LEN| OCCURENCES", "|NR.", sep=" "*(odstup_tabulka-11))  
 print(odelovac)
